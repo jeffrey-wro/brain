@@ -52,7 +52,7 @@ int main(int argc, char **argv) {
 
 	    count++;
 
-	    if(statefunc == startedState)
+	    if(statefunc == stoppedState)
 	    	break;
 
 	}
