@@ -13,9 +13,12 @@
 #include "ImageSender.h"
 #include "Ultrasonic.h"
 
+
+#include "brain.h"
+
+
 using namespace std;
 using namespace cv;
-
 
 extern NiFpga_Session myrio_session;
 NiFpga_Status status;
@@ -36,8 +39,23 @@ int main(int argc, char **argv) {
 	int volt = mc.readBatteryVoltage(1);
 	printf("%d\n\n", volt);
 
-	
 
+
+	
+	StateFunc statefunc = startedState;
+
+	int count = 0;
+
+	while (1) {
+
+	    statefunc = (StateFunc)(*statefunc)(&count);
+
+	    count++;
+
+	    if(statefunc == startedState)
+	    	break;
+
+	}
 
 
 
@@ -48,4 +66,36 @@ int main(int argc, char **argv) {
 	status = MyRio_Close();
 
 	return status;
+}
+
+
+
+
+
+
+void* startedState(int* count){
+
+	if(*count > 100){
+		return (void *)stoppedState; //Next state
+	}
+
+	if(false){
+		return NULL; //Next state
+	}
+
+	return (void *)startedState;
+}
+
+
+void* stoppedState(int* count){
+
+	if(false){
+		return NULL; //Next state
+	}
+
+	if(false){
+		return NULL; //Next state
+	}
+
+	return (void *)startedState;
 }
