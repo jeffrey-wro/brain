@@ -6,7 +6,7 @@
 
 void* startedState(Jeffrey* jeffrey, int* count){
 
-	jeffrey->moveForwardCM(10);
+	jeffrey->moveForwardCM(10, 50);
 
 	return (void *)outOfBox;
 }

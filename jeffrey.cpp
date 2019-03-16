@@ -5,6 +5,7 @@
 
 #include "jeffrey.h"
 
+
 Jeffrey::Jeffrey(){	
 
 }
@@ -29,11 +30,25 @@ void Jeffrey::reset(){
 }
 
 
-void Jeffrey::moveForwardCM(int cm){
+void Jeffrey::moveForwardCM(int cm, int speed){
 
-	printf("Jeffrey move forward\n");
-	fflush(stdout);
+	int degree = WHEEL_DEGREE_CM * cm;
+	int degree1 = degree+mc.readEncoderDegrees(DC, DC_1);
+	int degree2 = -degree+mc.readEncoderDegrees(DC, DC_2);
 
-	mc.setMotorSpeeds(DC, 50, -50);
+	mc.setMotorDegrees(DC, speed, degree1, speed, degree2);
+
+	//TODO maybe make a timeout
+	while(mc.readEncoderDegrees(DC, DC_1) != degree1 ){
+		Utils::waitForMicro(50000);
+		printf("%d\n", degree1);
+		printf("%d\n\n", mc.readEncoderDegrees(DC, DC_1));
+	}
+	Utils::waitForMicro(50000);
+	while(mc.readEncoderDegrees(DC, DC_2) != degree2 ){
+		Utils::waitForMicro(50000);
+		printf("%d\n", degree2);
+		printf("%d\n\n", mc.readEncoderDegrees(DC, DC_2));
+	}
 
 }
