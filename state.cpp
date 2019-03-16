@@ -4,27 +4,32 @@
 #include "jeffrey.h"
 #include "state.h"
 
-void* startedState(Jeffrey* jeffrey, int* count){
+void* startedState(Jeffrey* jeffrey){
 
-	jeffrey->moveForwardCM(10, 50);
+	printf("startedState\n");
+	fflush(stdout);
+
+	//move 36cm to be out of the box and 10cm to maneuver
+	jeffrey->moveForwardCM(36+10, 150);
 
 	return (void *)outOfBox;
 }
 
-void* outOfBox(Jeffrey* jeffrey, int* count){
+void* outOfBox(Jeffrey* jeffrey){
 
-	if(false){
-		return NULL; //Next state
-	}
+	printf("outOfBox\n");
+	fflush(stdout);
 
-	if(false){
-		return NULL; //Next state
-	}
+	//align perpendicular with wall
+	jeffrey->alignWithWall(25, 0.75);
 
-	return (void *)startedState;
+	return (void *)stoppedState;
 }
 
-void* stoppedState(Jeffrey* jeffrey, int* count){
+void* stoppedState(Jeffrey* jeffrey){
+
+	printf("stoppedState\n");
+	fflush(stdout);
 
 	if(false){
 		return NULL; //Next state
@@ -34,5 +39,5 @@ void* stoppedState(Jeffrey* jeffrey, int* count){
 		return NULL; //Next state
 	}
 
-	return (void *)startedState;
+	return (void *)stoppedState;
 }

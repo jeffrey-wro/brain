@@ -32,28 +32,23 @@ int main(int argc, char **argv) {
 		return status;
 	}
 
-	int count = 0;
-
 	Jeffrey jeffrey;
 	jeffrey.init(&myrio_session);
 	
 	StateFunc statefunc = startedState;
 
 
-	statefunc = (StateFunc)(*statefunc)(&jeffrey, &count);
-
-	/*int count = 0;
+	//statefunc = (StateFunc)(*statefunc)(&jeffrey);
 
 	while (1) {
 
-	    statefunc = (StateFunc)(*statefunc)(&jeffrey, &count);
+	    statefunc = (StateFunc)(*statefunc)(&jeffrey);
 
-	    count++;
 
 	    if(statefunc == stoppedState)
 	    	break;
 
-	}*/
+	}
 
 
 	jeffrey.reset();

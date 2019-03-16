@@ -2,10 +2,12 @@
 #define JEFFREY_H_
 
 #include "MyRio.h"
+#include "Ultrasonic.h"
 
 class Jeffrey {
 private:
 	Motor_Controller mc;
+    Ultrasonic ultrasonic;
 
 	/*
 	 * The number of degree to turn the (4" / 31.9cm) wheel forward one centimenter
@@ -20,6 +22,7 @@ public:
     void reset();
 
 	void moveForwardCM(int cm, int speed);
+	int alignWithWall(int speed, float calib);
 
 };
 

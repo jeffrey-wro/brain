@@ -3,11 +3,11 @@
 
 #include "jeffrey.h"
 
-typedef void* (*StateFunc)(Jeffrey* jeffrey, int*);
+typedef void* (*StateFunc)(Jeffrey* jeffrey);
 
-void* startedState(Jeffrey* jeffrey, int* count);
-void* outOfBox(Jeffrey* jeffrey, int* count);
-void* stoppedState(Jeffrey* jeffrey, int* count);
+void* startedState(Jeffrey* jeffrey);
+void* outOfBox(Jeffrey* jeffrey);
+void* stoppedState(Jeffrey* jeffrey);
 
 
 
